@@ -1,173 +1,73 @@
 "use client"
 
-import { Code2, Layers, Database, Globe } from "lucide-react"
-import { Hero } from "@/components/hero"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { useState, useMemo, useEffect } from "react"
+import { Navbar } from "@/components/Navbar"
+import { CategoryTabs } from "@/components/CategoryTabs"
+import { AppGrid } from "@/components/AppGrid"
+import { Footer } from "@/components/Footer"
+import { subApps, getAppsByCategory, searchApps } from "@/app/data/apps"
+import type { AppCategory } from "@/app/data/apps"
+import { LayersIcon } from "lucide-react"
 
-const stats = [
-  { icon: Code2, label: "年开发经验", value: "5+", numericValue: 5 },
-  { icon: Layers, label: "完成项目", value: "30+", numericValue: 30 },
-  { icon: Database, label: "技术栈", value: "20+", numericValue: 20 },
-  { icon: Globe, label: "满意客户", value: "15+", numericValue: 15 },
-]
+export default function Home() {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [activeCategory, setActiveCategory] = useState<AppCategory | "all">("all")
 
-function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme")
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark")
+    }
+  }, [])
 
-  return (
-    <motion.span
-      ref={ref}
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-    >
-      <motion.span
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        {value}
-      </motion.span>
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        {suffix}
-      </motion.span>
-    </motion.span>
-  )
-}
+  const filteredApps = useMemo(() => {
+    let apps = activeCategory === "all" ? subApps : getAppsByCategory(activeCategory)
 
-export default function HomePage() {
-  const aboutRef = useRef(null)
-  const statsRef = useRef(null)
-  const isAboutInView = useInView(aboutRef, { once: true, margin: "-100px" })
-  const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" })
+    if (searchQuery.trim()) {
+      apps = searchApps(searchQuery).filter((app) =>
+        activeCategory === "all" ? true : app.category === activeCategory
+      )
+    }
+
+    return apps
+  }, [searchQuery, activeCategory])
 
   return (
-    <>
-      <Hero
-        name="JJBlau2021"
-        title="全栈工程师"
-        tagline="使用现代技术构建优雅的解决方案。热爱整洁代码、用户体验和持续学习。"
-      />
+    <div className="min-h-screen flex flex-col relative">
+      <div className="fixed inset-0 bg-gradient-mesh -z-10" />
+      <div className="fixed inset-0 bg-dot-pattern opacity-40 -z-10 pointer-events-none" />
+      
+      <div className="fixed top-20 left-10 w-32 h-32 rounded-full bg-primary/5 blur-3xl -z-10" />
+      <div className="fixed bottom-40 right-20 w-48 h-48 rounded-full bg-accent/5 blur-3xl -z-10" />
+      <div className="fixed top-1/3 right-1/4 w-24 h-24 rounded-full bg-secondary/5 blur-2xl -z-10" />
 
-      <section className="bg-[#F8FAFC] py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={aboutRef}
-            initial="hidden"
-            animate={isAboutInView ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: { duration: 0.6, ease: "easeOut" },
-              },
-            }}
-          >
-            <div className="max-w-3xl mx-auto text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4">
-                关于我
-              </h2>
-              <div className="w-12 h-1 bg-[#2563EB] mx-auto mb-6" />
-            </div>
+      <Navbar onSearch={setSearchQuery} />
 
-            <Card className="max-w-3xl mx-auto border-[#E2E8F0] shadow-sm">
-              <CardContent className="p-6 md:p-8">
-                <p className="text-[#64748B] leading-relaxed mb-4">
-                  我是一名热情的全栈工程师，拥有超过5年的Web应用开发经验。
-                  我专注于React、Next.js和Node.js，致力于创建高性能、可访问、
-                  用户友好的界面。
-                </p>
-                <p className="text-[#64748B] leading-relaxed mb-4">
-                  编写代码之余，我喜欢探索新技术、参与开源项目，
-                  或者品尝一杯咖啡。我相信编写简洁、可维护的代码能带来真正的改变。
-                </p>
-                <div className="flex flex-wrap gap-2 mt-6">
-                  <Badge variant="secondary" className="bg-[#DBEAFE] text-[#2563EB] hover:bg-[#DBEAFE] hover:scale-105 transition-transform duration-200 cursor-default">
-                    TypeScript
-                  </Badge>
-                  <Badge variant="secondary" className="bg-[#DBEAFE] text-[#2563EB] hover:bg-[#DBEAFE] hover:scale-105 transition-transform duration-200 cursor-default">
-                    React
-                  </Badge>
-                  <Badge variant="secondary" className="bg-[#DBEAFE] text-[#2563EB] hover:bg-[#DBEAFE] hover:scale-105 transition-transform duration-200 cursor-default">
-                    Node.js
-                  </Badge>
-                  <Badge variant="secondary" className="bg-[#DBEAFE] text-[#2563EB] hover:bg-[#DBEAFE] hover:scale-105 transition-transform duration-200 cursor-default">
-                    Next.js
-                  </Badge>
-                  <Badge variant="secondary" className="bg-[#DBEAFE] text-[#2563EB] hover:bg-[#DBEAFE] hover:scale-105 transition-transform duration-200 cursor-default">
-                    PostgreSQL
-                  </Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </section>
+      <main className="flex-1">
+        <section className="container mx-auto px-4 py-10">
+          <div className="mb-10 relative">
+            <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-light to-accent rounded-full" />
+            <h1 className="text-4xl font-bold tracking-tight mb-3 pl-4 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+              欢迎来到我的小工具箱
+            </h1>
+            <p className="text-muted-foreground text-lg pl-4 flex items-center gap-2">
+              <LayersIcon className="size-5 text-primary" />
+              探索我亲手打造的小游戏、工具和交互应用
+            </p>
+          </div>
 
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isStatsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="max-w-3xl mx-auto text-center mb-12"
-            ref={undefined}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-4">
-              数据概览
-            </h2>
-            <div className="w-12 h-1 bg-[#2563EB] mx-auto" />
-          </motion.div>
+          <CategoryTabs
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+          />
 
-          <motion.div
-            ref={statsRef}
-            initial="hidden"
-            animate={isStatsInView ? "visible" : "hidden"}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1 },
-              },
-            }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-          >
-            {stats.map((stat) => (
-              <motion.div
-                key={stat.label}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.5, ease: "easeOut" },
-                  },
-                }}
-              >
-                <Card
-                  className="border-[#E2E8F0] text-center group hover:border-[#2563EB]/30 hover:shadow-lg hover:scale-[1.02] transition-all duration-200"
-                >
-                  <CardContent className="p-6">
-                    <stat.icon className="h-8 w-8 text-[#2563EB] mx-auto mb-4 group-hover:scale-110 transition-transform duration-200" />
-                    <div className="text-3xl md:text-4xl font-bold text-[#0F172A] mb-1">
-                      <AnimatedNumber value={stat.numericValue} suffix="+" />
-                    </div>
-                    <div className="text-sm text-[#64748B]">{stat.label}</div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-    </>
+          <div className="mt-8">
+            <AppGrid apps={filteredApps} />
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   )
 }
