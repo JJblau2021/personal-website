@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { SubApp } from "@/app/data/apps"
 import { SnakeGame } from "@/components/games/SnakeGame"
+import { SokobanGame } from "@/components/games/SokobanGame"
 import {
   ArrowLeftIcon,
   MaximizeIcon,
@@ -107,6 +108,8 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
           <div className="flex-1 bg-card rounded-2xl shadow-lg border border-border/50 flex items-center justify-center overflow-hidden aspect-video">
             {app.id === "snake" ? (
               <SnakeGame />
+            ) : app.id === "sokoban" ? (
+              <SokobanGame />
             ) : (
               <div className="text-center">
                 <div className="size-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
