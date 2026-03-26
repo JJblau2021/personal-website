@@ -20,7 +20,7 @@ export function CategoryTabs({ activeCategory, onCategoryChange }: CategoryTabsP
             variant={isActive ? "default" : "outline"}
             onClick={() => onCategoryChange(category.id as AppCategory | "all")}
             className={`
-              rounded-2xl whitespace-nowrap px-5 py-2.5 text-sm font-medium
+              rounded-2xl whitespace-nowrap px-5 py-2.5 text-sm font-medium cursor-pointer
               transition-all duration-200 ease-out
               ${isActive 
                 ? "bg-gradient-to-r from-primary to-primary-light text-primary-foreground shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5" 
