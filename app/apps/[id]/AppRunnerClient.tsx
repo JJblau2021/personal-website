@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import type { SubApp } from "@/app/data/apps"
@@ -18,6 +19,7 @@ interface AppRunnerClientProps {
 
 export function AppRunnerClient({ app }: AppRunnerClientProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -38,6 +40,15 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
     }
   }
 
+  const handleBack = useCallback(async () => {
+    if (document.fullscreenElement) {
+      await document.exitFullscreen()
+      setTimeout(() => router.push("/"), 100)
+    } else {
+      router.push("/")
+    }
+  }, [router])
+
   const categoryLabels = {
     games: "游戏",
     tools: "工具",
@@ -52,9 +63,8 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
             <Button
               variant="ghost"
               size="sm"
+              onClick={handleBack}
               className="rounded-xl gap-2"
-              render={<Link href="/" />}
-              nativeButton={false}
             >
               <ArrowLeftIcon className="size-4" />
               返回
