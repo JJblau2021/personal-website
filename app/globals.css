@@ -149,27 +149,44 @@
     box-shadow: 0 0 0 2px var(--color-ring), 0 0 0 4px var(--color-background);
   }
 
-  ::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  ::-webkit-scrollbar-track {
-    background: oklch(0.92 0.02 190 / 0.5);
-    border-radius: 9999px;
+  html::-webkit-scrollbar {
+    display: none;
   }
 
-  ::-webkit-scrollbar-thumb {
-    background: oklch(0.50 0.05 190 / 0.3);
-    border-radius: 9999px;
+  body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.50 0.05 190 / 0.5);
+  body::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
   }
 }
 
 @layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   .pixel-hover {
     transition: all 200ms ease-out;
   }

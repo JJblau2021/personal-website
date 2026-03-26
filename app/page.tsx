@@ -37,7 +37,7 @@ export default function Home() {
 
       <Navbar onSearch={setSearchQuery} />
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto scrollbar-hide">
         <section className="container mx-auto px-4 py-10">
           <div className="mb-10 relative">
             <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-light to-accent rounded-full" />
