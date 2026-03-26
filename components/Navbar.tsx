@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react"
 import Link from "next/link"
+import { useTheme } from "next-themes"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { SunIcon, MoonIcon, Gamepad2Icon, SearchIcon } from "lucide-react"
@@ -11,28 +12,23 @@ interface NavbarProps {
 }
 
 export function Navbar({ onSearch }: NavbarProps) {
-  const [isDark, setIsDark] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [searchValue, setSearchValue] = useState("")
 
   useEffect(() => {
-    const theme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-    const isDarkMode = theme === "dark" || (!theme && prefersDark)
-    setIsDark(isDarkMode)
+    setMounted(true)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const toggleTheme = useCallback(() => {
-    setIsDark((prev) => {
-      const newValue = !prev
-      if (newValue) {
-        document.documentElement.classList.add("dark")
-      } else {
-        document.documentElement.classList.remove("dark")
-      }
-      localStorage.setItem("theme", newValue ? "dark" : "light")
-      return newValue
-    })
-  }, [])
+    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+  }, [resolvedTheme, setTheme])
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +40,11 @@ export function Navbar({ onSearch }: NavbarProps) {
   )
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={`sticky top-0 z-50 w-full border-b border-border/50 transition-all duration-300 ${
+      scrolled 
+        ? "bg-background/60 dark:bg-black/20 backdrop-blur-md supports-[backdrop-filter]:bg-background/40" 
+        : "bg-background/80 dark:bg-black/30 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60"
+    }`}>
       <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="relative">
@@ -58,7 +58,7 @@ export function Navbar({ onSearch }: NavbarProps) {
 
         <div className="flex flex-1 items-center justify-end gap-3 max-w-md">
           <div className="relative w-full group">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors z-10">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary group-hover:text-primary group-hover:cursor-pointer transition-colors z-10">
               <SearchIcon className="size-4" />
             </div>
             <Input
@@ -66,7 +66,7 @@ export function Navbar({ onSearch }: NavbarProps) {
               placeholder="搜索应用..."
               value={searchValue}
               onChange={handleSearchChange}
-              className="w-full rounded-2xl bg-muted/50 pl-10 pr-4 border-2 border-transparent focus:border-primary/50 focus:ring-0 focus:shadow-lg focus:shadow-primary/10 transition-all duration-200"
+              className="w-full rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-sm pl-10 pr-4 border-2 border-border/50 dark:border-white/10 group-hover:border-primary/50 dark:group-hover:border-primary group-hover:bg-primary/5 dark:group-hover:bg-primary/10 group-hover:shadow-lg group-hover:shadow-primary/10 focus:border-primary/50 focus:ring-0 focus:shadow-lg focus:shadow-primary/10 transition-all duration-200 text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
@@ -74,13 +74,17 @@ export function Navbar({ onSearch }: NavbarProps) {
             variant="outline"
             size="icon"
             onClick={toggleTheme}
-            className="shrink-0 rounded-2xl border-2 border-transparent hover:border-primary/30 hover:bg-primary/5 dark:hover:bg-primary/10 transition-all duration-200 group"
+            className="shrink-0 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-sm border-2 border-border/50 dark:border-white/10 hover:border-primary/50 dark:hover:border-primary hover:bg-primary/5 dark:hover:bg-primary/10 hover:shadow-lg hover:shadow-primary/10 hover:cursor-pointer transition-all duration-200 group"
             aria-label="切换主题"
           >
-            {isDark ? (
-              <SunIcon className="size-4 text-amber-500 group-hover:rotate-12 transition-transform duration-300" />
+            {mounted ? (
+              resolvedTheme === "dark" ? (
+                <SunIcon className="size-4 text-primary group-hover:rotate-12 transition-transform duration-200" />
+              ) : (
+                <MoonIcon className="size-4 text-primary group-hover:-rotate-12 transition-transform duration-200" />
+              )
             ) : (
-              <MoonIcon className="size-4 text-primary group-hover:-rotate-12 transition-transform duration-300" />
+              <div className="size-4" />
             )}
           </Button>
         </div>

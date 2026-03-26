@@ -9,9 +9,9 @@ interface AppCardProps {
 }
 
 const categoryColors: Record<SubApp["category"], string> = {
-  games: "bg-orange-500/10 text-orange-600 dark:text-orange-400 border-orange-500/20",
-  tools: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20",
-  interactive: "bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20",
+  games: "bg-primary/10 text-primary border-primary/20",
+  tools: "bg-secondary/10 text-secondary border-secondary/20",
+  interactive: "bg-accent/10 text-accent border-accent/20",
 }
 
 const categoryLabels: Record<SubApp["category"], string> = {

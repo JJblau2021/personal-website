@@ -2,8 +2,7 @@ import { GithubIcon, HeartIcon, SparklesIcon } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-border/50 bg-muted/20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-dot-pattern opacity-20 pointer-events-none" />
+    <footer className="border-t-2 border-border/50 bg-muted/40 dark:bg-gradient-to-t dark:from-secondary/15 dark:via-accent/10 dark:to-transparent relative overflow-hidden">
       <div className="container mx-auto px-4 py-10 relative">
         <div className="flex flex-col items-center gap-6 text-center">
           <div className="flex items-center gap-2">
@@ -27,7 +26,7 @@ export function Footer() {
           <div className="relative">
             <p className="text-sm text-muted-foreground">
               用
-              <HeartIcon className="inline size-3 mx-1 text-rose-500 animate-pulse" />
+              <HeartIcon className="inline size-3 mx-1 text-destructive animate-pulse" />
               构建 · 全部应用运行于浏览器端
             </p>
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent rounded-full" />
