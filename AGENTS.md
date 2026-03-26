@@ -1,3 +1,8 @@
+<!-- BEGIN:global-rules -->
+# 全局规则
+- 所有回答使用中文
+<!-- END:global-rules -->
+
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
