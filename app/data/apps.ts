@@ -32,16 +32,6 @@ export const subApps: SubApp[] = [
     path: "/apps/snake",
     instructions: "使用方向键或 WASD 控制小蛇的移动方向。吃蔬菜水果可让小蛇变长，尽量获得更高分数吧！注意不要撞到篱笆或自己的身体哦。",
   },
-  {
-    id: "sokoban",
-    name: "AI 推箱子",
-    description: "经典的推箱子益智游戏，通过大模型智能生成关卡，挑战你的空间推理能力。",
-    category: "games",
-    thumbnail: "/sokoban.png",
-    techStack: ["React", "TypeScript", "AI"],
-    path: "/apps/sokoban",
-    instructions: "使用方向键或 WASD 推动箱子到目标位置。每个关卡只有一个解决方案，箱子只能推不能拉。R 键重置当前关卡，N 键进入下一关。",
-  },
 ]
 
 export function getAppById(id: string): SubApp | undefined {
