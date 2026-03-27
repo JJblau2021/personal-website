@@ -32,6 +32,16 @@ export const subApps: SubApp[] = [
     path: "/apps/snake",
     instructions: "使用方向键或 WASD 控制小蛇的移动方向。吃蔬菜水果可让小蛇变长，尽量获得更高分数吧！注意不要撞到篱笆或自己的身体哦。",
   },
+  {
+    id: "tetris",
+    name: "经典俄罗斯方块",
+    description: "经典的俄罗斯方块游戏，下落方块、消除行、获得高分。回忆童年时光，挑战最高分！",
+    category: "games",
+    thumbnail: "/tetris.png",
+    techStack: ["React", "TypeScript"],
+    path: "/apps/tetris",
+    instructions: "← → 方向键移动方块，↑ 旋转，↓ 加速下落。空格键硬降。对战模式：双人对战，看谁先完成 5 行！",
+  },
 ]
 
 export function getAppById(id: string): SubApp | undefined {
