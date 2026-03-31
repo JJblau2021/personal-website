@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import type { SubApp } from "@/app/data/apps"
 import { SnakeGame } from "@/components/games/SnakeGame"
 import { TetrisGame } from "@/components/games/TetrisGame"
+import { SurvivalGuideGame } from "@/components/games/SurvivalGuideGame"
 import { JsonTool } from "@/components/tools/JsonTool"
 import { ImageCompressTool } from "@/components/tools/ImageCompressTool"
 import {
@@ -107,11 +108,13 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
 
       <main className="flex-1 flex items-center justify-center p-4">
         <div className="flex gap-4 max-w-6xl mx-auto w-full">
-          <div className={`flex-1 rounded-2xl shadow-lg border border-border/50 flex items-center justify-center overflow-hidden ${app.id === "json-tool" || app.id === "image-compress" ? "bg-background" : "bg-slate-900"}`}>
+          <div className={`flex-1 rounded-2xl shadow-lg border border-border/50 flex items-center justify-center overflow-hidden ${app.id === "json-tool" || app.id === "image-compress" || app.id === "survival-guide" ? "bg-background" : "bg-slate-900"}`}>
             {app.id === "snake" ? (
               <SnakeGame />
             ) : app.id === "tetris" ? (
               <TetrisGame />
+            ) : app.id === "survival-guide" ? (
+              <SurvivalGuideGame />
             ) : app.id === "json-tool" ? (
               <JsonTool />
             ) : app.id === "image-compress" ? (

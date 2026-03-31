@@ -44,6 +44,16 @@ export const subApps: SubApp[] = [
     instructions: "← → 方向键移动方块，↑ 旋转，↓ 加速下落。空格键硬降。对战模式：双人对战，看谁先完成 5 行！",
   },
   {
+    id: "survival-guide",
+    name: "大厂员工生存指南",
+    description: "通过多轮选项问答，决定你在大厂的命运。不同选择会会影响健康、精神、人缘和职级数值。",
+    category: "games",
+    thumbnail: "/survivalGuide.png",
+    techStack: ["React", "TypeScript", "状态机"],
+    path: "/apps/survival-guide",
+    instructions: "阅读故事并选择你的行动。不同选择会影响角色的各项属性，最终走向不同的结局。",
+  },
+  {
     id: "json-tool",
     name: "JSON 预览器",
     description: "输入 JSON 字符串，即可获得树形结构预览，支持格式化、压缩和复制。",
