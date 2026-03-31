@@ -19,6 +19,7 @@ export interface Category {
 export const categories: Category[] = [
   { id: "all", label: "全部" },
   { id: "games", label: "小游戏" },
+  { id: "tools", label: "工具" },
 ]
 
 export const subApps: SubApp[] = [
@@ -41,6 +42,16 @@ export const subApps: SubApp[] = [
     techStack: ["React", "TypeScript"],
     path: "/apps/tetris",
     instructions: "← → 方向键移动方块，↑ 旋转，↓ 加速下落。空格键硬降。对战模式：双人对战，看谁先完成 5 行！",
+  },
+  {
+    id: "json-tool",
+    name: "JSON 预览器",
+    description: "输入 JSON 字符串，即可获得树形结构预览，支持格式化、压缩和复制。",
+    category: "tools",
+    thumbnail: "/jsonTool.png",
+    techStack: ["React", "TypeScript", "Tailwind"],
+    path: "/apps/json-tool",
+    instructions: "在左侧输入框粘贴 JSON，右侧将自动预览树形结构。支持格式化（缩进）、压缩（去除空格）和一键复制。",
   },
 ]
 
