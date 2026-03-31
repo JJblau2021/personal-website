@@ -24,6 +24,16 @@ export const categories: Category[] = [
 
 export const subApps: SubApp[] = [
   {
+    id: "color-generator",
+    name: "AI 颜色生成器",
+    description: "基于 AI 智能分析，输入描述词即可生成精美的配色方案。支持科技感、温暖、活力等多种风格。",
+    category: "tools",
+    thumbnail: "/colorGenerator.png",
+    techStack: ["React", "TypeScript", "MiniMax API"],
+    path: "/apps/color-generator",
+    instructions: "在输入框中输入描述词（如「科技感」「日落」「森林」），点击生成按钮。AI 将为你生成 5-8 个颜色的完整配色方案，包括主色、辅色和强调色。",
+  },
+  {
     id: "snake",
     name: "牧场贪吃蛇",
     description: "经典的牧场物语风格贪吃蛇游戏，在绿意盎然的农田中控制小蛇收集蔬菜水果，体验田园乐趣。",
