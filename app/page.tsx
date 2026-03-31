@@ -42,11 +42,11 @@ export default function Home() {
           <div className="mb-10 relative">
             <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary-light to-accent rounded-full" />
             <h1 className="text-4xl font-bold tracking-tight mb-3 pl-4 text-foreground">
-              欢迎来到我的小工具箱
+              欢迎来到 <span className="bg-gradient-to-r from-primary via-primary-light to-accent bg-clip-text text-transparent">Vibe Coding Tools</span>
             </h1>
             <p className="text-muted-foreground text-lg pl-4 flex items-center gap-2">
               <LayersIcon className="size-5 text-primary" />
-              探索我亲手打造的小游戏、工具和交互应用
+              探索各种有趣的小游戏和实用工具
             </p>
           </div>
 

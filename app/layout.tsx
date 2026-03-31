@@ -7,26 +7,26 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
   title: {
-    default: "我的小工具 - 个人应用集合",
-    template: "%s | 我的小工具",
+    default: "Vibe Coding Tools",
+    template: "%s | Vibe Coding Tools",
   },
   description:
-    "探索我亲手打造的小游戏、工具和交互应用集合平台，包含贪吃蛇、计算器、倒计时等有趣的小工具。",
+    "A collection of fun mini-games and useful tools, including Snake, JSON Viewer, Image Compressor, and more.",
   keywords: [
-    "个人作品",
-    "小工具",
-    "小游戏",
-    "贪吃蛇",
-    "计算器",
-    "在线工具",
+    "mini games",
+    "tools",
+    "snake",
+    "json viewer",
+    "image compressor",
+    "online tools",
   ],
-  authors: [{ name: "开发者" }],
+  authors: [{ name: "Developer" }],
   openGraph: {
-    title: "我的小工具 - 个人应用集合",
+    title: "Vibe Tools",
     description:
-      "探索我亲手打造的小游戏、工具和交互应用集合平台",
+      "A collection of fun mini-games and useful tools",
     type: "website",
-    locale: "zh_CN",
+    locale: "en_US",
   },
 }
 
@@ -36,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}

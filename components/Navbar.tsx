@@ -52,7 +52,7 @@ export function Navbar({ onSearch }: NavbarProps) {
             <div className="absolute -top-1 -right-1 size-2.5 rounded-full bg-accent animate-pulse" />
           </div>
           <span className="text-lg font-bold tracking-tight group-hover:text-primary transition-colors">
-            我的小工具
+            Vibe Coding Tools
           </span>
         </Link>
 
