@@ -53,6 +53,16 @@ export const subApps: SubApp[] = [
     path: "/apps/json-tool",
     instructions: "在左侧输入框粘贴 JSON，右侧将自动预览树形结构。支持格式化（缩进）、压缩（去除空格）和一键复制。",
   },
+  {
+    id: "image-compress",
+    name: "图片压缩器",
+    description: "上传图片，快速压缩减小文件体积，支持调整压缩质量。",
+    category: "tools",
+    thumbnail: "/imageCompress.png",
+    techStack: ["React", "TypeScript", "Canvas API"],
+    path: "/apps/image-compress",
+    instructions: "拖拽或上传图片，选择压缩质量，点击压缩按钮。压缩后可预览效果并下载。",
+  },
 ]
 
 export function getAppById(id: string): SubApp | undefined {
