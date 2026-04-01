@@ -12,12 +12,14 @@ const categoryColors: Record<SubApp["category"], string> = {
   games: "bg-primary/10 text-primary border-primary/20",
   tools: "bg-secondary/10 text-secondary border-secondary/20",
   interactive: "bg-accent/10 text-accent border-accent/20",
+  external: "bg-warning/10 text-warning border-warning/20",
 }
 
 const categoryLabels: Record<SubApp["category"], string> = {
   games: "游戏",
   tools: "工具",
   interactive: "交互",
+  external: "外部",
 }
 
 export function AppCard({ app }: AppCardProps) {

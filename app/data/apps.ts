@@ -1,4 +1,4 @@
-export type AppCategory = "games" | "tools" | "interactive"
+export type AppCategory = "games" | "tools" | "interactive" | "external"
 
 export interface SubApp {
   id: string
@@ -9,6 +9,7 @@ export interface SubApp {
   techStack: string[]
   path: string
   instructions?: string
+  externalUrl?: string
 }
 
 export interface Category {
@@ -20,9 +21,21 @@ export const categories: Category[] = [
   { id: "all", label: "全部" },
   { id: "games", label: "小游戏" },
   { id: "tools", label: "工具" },
+  { id: "external", label: "外部应用" },
 ]
 
 export const subApps: SubApp[] = [
+  {
+    id: "westlake",
+    name: "西湖揽胜",
+    description: "探索西湖美景的互动导览应用，包含景点介绍、路线规划等功能。",
+    category: "external",
+    thumbnail: "/westlake.png",
+    techStack: ["Web"],
+    path: "/apps/westlake",
+    externalUrl: "https://app-anqalivecxs1.appmiaoda.com",
+    instructions: "点击后将跳转到外部网页",
+  },
   {
     id: "color-generator",
     name: "AI 颜色生成器",

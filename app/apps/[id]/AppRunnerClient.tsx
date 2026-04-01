@@ -58,7 +58,10 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
     games: "游戏",
     tools: "工具",
     interactive: "交互",
+    external: "外部应用",
   }
+
+  const isExternalApp = app.category === "external" || app.externalUrl
 
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
@@ -109,7 +112,7 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
 
       <main className="flex-1 flex items-center justify-center p-4">
         <div className="flex gap-4 max-w-6xl mx-auto w-full">
-          <div className={`flex-1 rounded-2xl shadow-lg border border-border/50 flex items-center justify-center overflow-hidden ${app.id === "json-tool" || app.id === "image-compress" || app.id === "survival-guide" || app.id === "color-generator" ? "bg-background" : "bg-slate-900"}`}>
+          <div className={`flex-1 rounded-2xl shadow-lg border border-border/50 flex items-center justify-center overflow-hidden ${app.id === "json-tool" || app.id === "image-compress" || app.id === "survival-guide" || app.id === "color-generator" || isExternalApp ? "bg-background" : "bg-slate-900"}`}>
             {app.id === "snake" ? (
               <SnakeGame />
             ) : app.id === "tetris" ? (
@@ -122,6 +125,26 @@ export function AppRunnerClient({ app }: AppRunnerClientProps) {
               <ImageCompressTool />
             ) : app.id === "color-generator" ? (
               <ColorGeneratorTool />
+            ) : isExternalApp ? (
+              <div className="flex flex-col items-center justify-center gap-6 w-full h-full min-h-[400px]">
+                <div className="size-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <span className="text-4xl font-bold text-primary">
+                    {app.name.charAt(0)}
+                  </span>
+                </div>
+                <div className="text-center">
+                  <p className="text-lg font-medium mb-2">{app.name}</p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    点击下方按钮跳转到外部应用
+                  </p>
+                  <Button
+                    size="lg"
+                    onClick={() => window.open(app.externalUrl, "_blank")}
+                  >
+                    打开西湖揽胜
+                  </Button>
+                </div>
+              </div>
             ) : (
               <div className="text-center">
                 <div className="size-20 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
