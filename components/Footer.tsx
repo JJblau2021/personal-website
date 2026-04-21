@@ -13,7 +13,7 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <a
-              href="https://github.com"
+              href="https://github.com/JJblau2021/personal-website.git"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-all duration-200 hover:scale-110 p-2 rounded-xl hover:bg-primary/5"
